@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Building Map</title>
+  <style>
+    #map {
+      height: 100vh;
+      width: 100vw;
+    }
+    .filter-panel {
+      position: absolute;
+      top: 50px;
+      right: 10px;
+      background: white;
+      padding: 10px;
+      border: 1px solid gray;
+    }
+    .hideButton{
+      position: absolute;
+      top: 20px;
+      right: 10px;
+      width: 272px;
+      background: white;
+      padding: 5px;
+      border: 1px solid gray;
+      cursor: pointer;
+    }
+    .hideButton:hover{
+        background: rgb(230, 228, 228);
+    }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+  <button id="hideButton" onclick="handleHide()" class="hideButton">Hide Filter</button>
+  <button id="showButton" style="visibility: hidden;" onclick="handleHide()" class="hideButton">Show Filter</button>
+  <script>
+     function handleHide() {
+        if (document.getElementById("filterPanel").style.visibility === "visible") {
+            document.getElementById("filterPanel").style.visibility = "hidden";
+            document.getElementById("hideButton").style.visibility = "hidden";
+            document.getElementById("showButton").style.visibility = "visible";
+        } else {
+            document.getElementById("filterPanel").style.visibility = "visible";
+            document.getElementById("hideButton").style.visibility = "visible";
+            document.getElementById("showButton").style.visibility = "hidden";
+        }
+     }
+  </script>
+  <div id="filterPanel" style="visibility: visible;" class="filter-panel">
+    <label for="building-type">Filter by Building Type:</label>
+    <select id="building-type">
+      <option value="">All</option>
+      <option value="Healthcare">Healthcare</option>
+      <option value="Park">Park</option>
+      <option value="Office">Office</option>
+      <option value="Multi-family">Multi-family</option>
+    </select>
+  </div>
+
+  <script>
+    function initMap() {
+      const buildings = [
+        { lat: 49.83945, lng: 24.0415, type: 'Healthcare', color: 'blue'},
+        { lat: 49.82945, lng: 24.0190, type: 'Park', color: 'blue'},
+        { lat: 49.82945, lng: 24.0538, type: 'Office', color: 'red' },
+        { lat:  49.83965, lng: 24.0568, type: 'Multi-family', color: 'blue'}
+      ];
+
+      const map = new google.maps.Map(document.getElementById('map'), {
+        center: { lat: 49.83945, lng: 24.0415 },
+        zoom: 13
+      });
+
+      const markers = [];
+
+      buildings.forEach(building => {
+        const marker = new google.maps.Marker({
+          position: { lat: building.lat, lng: building.lng },
+          map: map,
+          icon: building.type === 'Office' ? 'http://maps.google.com/mapfiles/ms/icons/red-dot.png' : 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+        });
+        markers.push(marker);
+      });
+
+      const filterSelect = document.getElementById('building-type');
+      filterSelect.addEventListener('change', function () {
+        const selectedType = this.value;
+        let i = 0;
+        markers.forEach(marker => {
+          if (selectedType === buildings[i].type || selectedType === '') {
+            marker.setVisible(true);
+          } else {
+            marker.setVisible(false);
+          }
+          i++;
+        });
+      });
+    }
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDuoMsLrqxRgdZPJ50II9kTcxCPJXI9c2Y&callback=initMap" async defer></script>
+</body>
+</html>
