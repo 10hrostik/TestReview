@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Projects\\Rider\\GoogleDriveProject\\GoogleDriveProject\\GoogleDriveProject.csproj": {}
+    "C:\\Projects\\Rider\\TestReview\\GoogleDriveProject\\GoogleDriveProject\\GoogleDriveProject.csproj": {}
   },
   "projects": {
-    "C:\\Projects\\Rider\\GoogleDriveProject\\GoogleDriveProject\\GoogleDriveProject.csproj": {
+    "C:\\Projects\\Rider\\TestReview\\GoogleDriveProject\\GoogleDriveProject\\GoogleDriveProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Projects\\Rider\\GoogleDriveProject\\GoogleDriveProject\\GoogleDriveProject.csproj",
+        "projectUniqueName": "C:\\Projects\\Rider\\TestReview\\GoogleDriveProject\\GoogleDriveProject\\GoogleDriveProject.csproj",
         "projectName": "GoogleDriveProject",
-        "projectPath": "C:\\Projects\\Rider\\GoogleDriveProject\\GoogleDriveProject\\GoogleDriveProject.csproj",
+        "projectPath": "C:\\Projects\\Rider\\TestReview\\GoogleDriveProject\\GoogleDriveProject\\GoogleDriveProject.csproj",
         "packagesPath": "C:\\Users\\theho\\.nuget\\packages\\",
-        "outputPath": "C:\\Projects\\Rider\\GoogleDriveProject\\GoogleDriveProject\\obj\\",
+        "outputPath": "C:\\Projects\\Rider\\TestReview\\GoogleDriveProject\\GoogleDriveProject\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\theho\\AppData\\Roaming\\NuGet\\NuGet.Config",

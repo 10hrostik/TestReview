@@ -11,8 +11,8 @@ namespace GoogleDriveProject
 {
     class Program
     {
-        private static readonly string CredentialsFilePath = "C:/Projects/Rider/GoogleDriveProject/GoogleDriveProject/OAuthJSON/OAuth.json";
-        private static readonly string SpreadsheetName = "mySpreadSheet";
+        private static readonly string CredentialsFilePath = "C:/Projects/Rider/TestReview/GoogleDriveProject/GoogleDriveProject/OAuthJSON/OAuth.json";
+        private static readonly string SpreadsheetName = "mySpreadSheetTest";
         private static readonly string[] Scopes = { DriveService.Scope.DriveReadonly, SheetsService.Scope.Spreadsheets };
         private static DriveService DriveService;
         private static SheetsService SheetsService;
@@ -33,11 +33,11 @@ namespace GoogleDriveProject
                 HttpClientInitializer = credential,
                 ApplicationName = "driveApiTest"
             }); 
-            GetResultList(DriveService);
+            PrintResultList(DriveService);
             SpreadSheet = CreateSheet(SheetsService);
-            Console.WriteLine("After Creating:");
             Console.WriteLine("Sheet created with name: " + SpreadSheet.Properties.Title);
-            
+            Console.WriteLine("Updated list:");
+            PrintResultList(DriveService);
             
             int num = 0; 
             TimerCallback timerCallback = new TimerCallback(SyncFilesToSpreadsheet);
@@ -62,7 +62,7 @@ namespace GoogleDriveProject
             return credential;
         }
 
-        private static void GetResultList(DriveService driveService)
+        private static void PrintResultList(DriveService driveService)
         {
             var req = driveService.Files.List();
             req.Q = "name contains '*'";
@@ -105,6 +105,8 @@ namespace GoogleDriveProject
             appendRequest.Execute();
 
             Console.WriteLine("Sync process completed at: " + DateTime.Now);
+            Console.WriteLine("Updated list after sync:");
+            PrintResultList(DriveService);
         }
 
         private static ValueRange GetValueRange(IList<Google.Apis.Drive.v3.Data.File> files)
